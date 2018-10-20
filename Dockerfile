@@ -15,7 +15,7 @@ ENV LC_ALL C.UTF-8
 ENV JAVA_OPTS "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dfile.encoding=UTF-8"
 
 # Add Metabase jar
-ADD http://downloads.metabase.com/v0.28.1/metabase.jar ./metabase.jar
+ADD http://downloads.metabase.com/v0.30.4/metabase.jar ./metabase.jar
 
 # Google Cloud SQL support
 ADD https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 ./cloud_sql_proxy
