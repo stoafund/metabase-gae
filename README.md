@@ -19,5 +19,5 @@ gcloud sql instances describe foo --format='value(connectionName)'
 ## Deployment
 
 ```bash
-gcloud app deploy
+gcloud app deploy --quiet --verbosity=debug
 ```

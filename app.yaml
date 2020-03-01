@@ -3,9 +3,22 @@ env: flex
 service: stoa-metabase
 # Metabase does not support horizontal scaling
 #   https://github.com/metabase/metabase/issues/2754
-#   https://cloud.google.com/appengine/docs/flexible/java/configuring-your-app-with-app-yaml
 manual_scaling:
   instances: 1
+instance_class: B4_HIGHMEM
+
+resources:
+  cpu: 1
+  memory_gb: 1
+  disk_size_gb: 10
+
+readiness_check:
+  path: "/api/health"
+  check_interval_sec: 5
+  timeout_sec: 5
+  failure_threshold: 2
+  success_threshold: 2
+  app_start_timeout_sec: 60
 
 env_variables:
   MB_JETTY_PORT: 8080
@@ -14,6 +27,12 @@ env_variables:
   MB_DB_PORT: 5432
   MB_DB_USER: metabase
   MB_DB_PASS: C2m4V9Md97M739Tvm46
-  MB_DB_HOST: 127.0.0.1
-  CLOUD_SQL_INSTANCE: inspection-fund:us-east1:stoa-postgress-inspection
-
+  METABASE_SQL_INSTANCE: inspection-fund:us-east1:stoa-postgress-inspection=tcp:5432
+beta_settings:
+    cloud_sql_instances: inspection-fund:us-east1:stoa-postgress-inspection=tcp:5432
+liveness_check:
+   path: "/api/health"
+   check_interval_sec: 30
+   timeout_sec: 4
+   failure_threshold: 2
+   success_threshold: 2   
